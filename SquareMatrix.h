@@ -5,7 +5,8 @@ template<typename T>
 class SquareMatrix
 {
 private:
-    /* data */
+    T* _ptr;
+    size_t _size;
 public:
     SquareMatrix(); //default constructor
 
