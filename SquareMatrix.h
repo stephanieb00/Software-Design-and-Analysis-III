@@ -120,7 +120,16 @@ public:
         }//end of for loop.
     }//end of resize function.
 
-    
+    /*
+        @param: Function Size
+        @returns: _size
+    */
+   size_t size()
+   {
+       return _size;
+   }//end of function size;
+
+
 };
 
 
