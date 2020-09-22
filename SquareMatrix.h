@@ -45,7 +45,19 @@ public:
     SquareMatrix(const SquareMatrix<T>& trg)
     {
         _size = trg._size;
-        _ptr = new T[_size][_size];//dynamic 2D Array.
+        _ptr = new T[_size];//creates an array of rows. 
+
+        for (size_t i = 0; i < count; i++)
+        {
+            _ptr[i] = new T[_size];//columns
+            for (size_t j = 0; j < count; j++)
+            {
+                _ptr[i][j] = trg._ptr[i][j]
+            }
+            
+        }
+        
+
 
         //set the contents in the trg 2D array to the _ptr. 
         for (size_t i = 0; i < trg._size; i++)
