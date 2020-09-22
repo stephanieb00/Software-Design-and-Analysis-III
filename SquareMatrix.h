@@ -26,11 +26,16 @@ public:
 
     /*
         @param: destructor 
-        @param: we want to be able to destroy _ptr in order to be able to deallocate memory 
+        @param: we want to be able to destroy _ptr which is 2D array in order to be able to deallocate memory 
                 and we want to reset size to 0;
     */
     ~SquareMatrix()
     {
+        for (size_t i = 0; i < count; i++)
+        {
+            _ptr = nullptr;
+            delete[] _ptr[i];
+        }//end of for loop
         _ptr = nullptr;
         delete _ptr;
         _size = 0;
@@ -47,15 +52,14 @@ public:
         _size = trg._size;
         _ptr = new T[_size];//creates an array of rows. 
 
-        for (size_t i = 0; i < count; i++)
+        for (size_t i = 0; i < _size; i++)
         {
             _ptr[i] = new T[_size];//columns
-            for (size_t j = 0; j < count; j++)
+            for (size_t j = 0; j < _size; j++)
             {
                 _ptr[i][j] = trg._ptr[i][j]
-            }
-            
-        }
+            }//end of for loop.
+        }//end of for loop. 
         
 
 
