@@ -1,4 +1,4 @@
-#include <SquareMatrix.h>
+#include "SquareMatrix.h"
 #include <iostream>
 #include <string>
 using namespace std;

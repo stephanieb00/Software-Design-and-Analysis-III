@@ -1,5 +1,7 @@
 #pragma once
 
+#include <iostream>
+
 template<typename T>
 
 class SquareMatrix
@@ -43,11 +45,11 @@ public:
         _ptr = new T[_size][_size];//dynamic 2D Array.
 
         //set the contents in the trg 2D array to the _ptr. 
-        for (size_t i{0}; i < trg._size; i++)
+        for (size_t i = 0; i < trg._size; i++)
         {
-            for (size_t j{0}; j < trg._size; j++)
+            for (size_t j = 0; j < trg._size; j++)
             {
-                _ptr[i][j] = trg._ptr[i][j]
+                _ptr[i][j] = trg._ptr[i][j];
             }//end of for loop. 
         }//end of for loop.
         
@@ -102,7 +104,7 @@ public:
         }
         
         //deallocate memory. Destroy previous content. 
-        for (size_t i{0}; i < _size; i++)
+        for (size_t i = 0; i < _size; i++)
         {
            delete _ptr[i];
         }//end of for loop.
@@ -111,9 +113,9 @@ public:
         _size = new_size; // _size will be whatever new_size is. 
         new_array = new T[_size][_size];
 
-        for (size_t i{0}; i < _size; i++)
+        for (size_t i = 0; i < _size; i++)
         {
-            for (size_t j{0}; j < _size; j++)
+            for (size_t j = 0; j < _size; j++)
             {
                 _ptr[i][j] = new_array[i][j];
             }//for loop.
@@ -132,7 +134,7 @@ public:
        if (matrix_a._size == matrix_b._size)
        {
            //go through each row and column of the matrix and check if they are identical. 
-           for (size_t i {0}; i < matrix_a._size; i++)
+           for (size_t i = 0; i < matrix_a._size; i++)
            {
                for (size_t j = 0; j < matrix_a._size; j++)
                {
@@ -168,10 +170,10 @@ public:
        if (matrix_a._size == matrix_b._size)
        {
            matrix_c._size= matrix_b._size;
-           matrix_c._ptr = new T[matrix_c._size][matrix_c._size] 
-           for (size_t i {0}; i < matrix_c._size; i++)
+           matrix_c._ptr = new T[matrix_c._size][matrix_c._size];
+           for (size_t i = 0; i < matrix_c._size; i++)
            {
-               for (size_t j = 0; j < count; j++)
+               for (size_t j = 0; j < matrix_c._size; j++)
                {
                    matrix_c[i][j] = matrix_a[i][j] + matrix_b[i][j];
                }//end of for statement
