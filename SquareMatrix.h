@@ -31,14 +31,14 @@ public:
     */
     ~SquareMatrix()
     {
-        for (size_t i = 0; i < _size; i++)
+       /* for (size_t i = 0; i < _size; i++)
         {
             for (size_t j = 0; j < _size; j++)
             {
-                delete _ptr[i][j];
+                delete[] _ptr[i][j];
             }//end of for loop.
             delete[] _ptr[i];
-        }//end of for loop
+        }//end of for loop */
         delete[] _ptr;
         _ptr = nullptr;
         _size = 0;
