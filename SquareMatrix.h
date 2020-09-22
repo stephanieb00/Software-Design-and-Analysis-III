@@ -29,7 +29,7 @@ public:
     ~SquareMatrix()
     {
         _ptr = nullptr;
-        delete _ptr;
+        delete[] _ptr;
         _size = 0;
     }//end of destructor
     
