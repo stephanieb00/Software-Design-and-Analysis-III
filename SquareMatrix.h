@@ -114,7 +114,7 @@ public:
         @param: release all of the previous memory.
         @param: Allocate new memory. Can be any value <T>
     */
-    void resize(size_t new_size)
+  /*  void resize(size_t new_size)
     {
         //compare new_size and _size. If they are the same there is not need to resize.
         if (new_size == _size)
@@ -125,7 +125,7 @@ public:
         //deallocate memory. Destroy previous content. 
         for (size_t i = 0; i < _size; i++)
         {
-           delete[] _ptr[i];
+           delete _ptr[i];
         }//end of for loop.
 
         //Allocate the new data into _ptr. 
@@ -140,6 +140,8 @@ public:
             }//for loop.
         }//end of for loop.
     }//end of resize() function.
+
+    */
 
     /*
         @param: Operator ==
