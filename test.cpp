@@ -5,7 +5,8 @@ using namespace std;
 
 void Test1()
 {
-    SquareMatrix<int> matrix_a, matrix_b;
+   /* 
+   SquareMatrix<int> matrix_a, matrix_b;
     cout<< "Matrix A Size: "<< matrix_a._size;<< endl;
     cout<< "Matrix B Size: "<< matrix_a._size;<< endl;
 
@@ -19,7 +20,8 @@ void Test1()
     cout<<"Matrix E" << matrix_e <<endl;
     matrix_b = move(e);
     cout<<"Matrix B" << matrix_b <<endl;
-    cout<<"Matrix E" << matrix_e <<endl;
+    cout<<"Matrix E" << matrix_e <<endl; 
+    */
 
 
 
