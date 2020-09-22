@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+using namespace std;
 
 template<typename T>
 
@@ -29,7 +30,7 @@ public:
     ~SquareMatrix()
     {
         _ptr = nullptr;
-        delete[] _ptr;
+        delete _ptr;
         _size = 0;
     }//end of destructor
     
@@ -39,7 +40,7 @@ public:
         @param: creates a 2D Dynamic array and sets it to the raw pointer.
         @param: since it is a square columns and rows are the same. 
     */
-    SquareMatrix(const SquareMatrix& trg)
+    SquareMatrix(const SquareMatrix<T>& trg)
     {
         _size = trg._size;
         _ptr = new T[_size][_size];//dynamic 2D Array.
@@ -59,7 +60,7 @@ public:
     /*
         @param: move constructor
     */
-    SquareMatrix(SquareMatrix&& trg)
+    SquareMatrix(SquareMatrix<T>&& trg)
     {
         _ptr = trg._ptr;
         trg._ptr = nullptr; 
@@ -69,7 +70,7 @@ public:
         @param: copy assignment
         @return: *this
     */
-    SquareMatrix& operator=(const SquareMatrix& rhs)
+    SquareMatrix& operator=(const SquareMatrix<T>& rhs)
     { 
         SquareMatrix copy = rhs; //places a copy of rhs into copy;
         std::swap(*this, copy); //swaps copy into *this. 
@@ -80,7 +81,7 @@ public:
         @param: move assignment
         @param: use swap for three copies  
     */
-    SquareMatrix& operator=(SquareMatrix&& rhs)
+    SquareMatrix& operator=(SquareMatrix<T>&& rhs)
     {
         std::swap(_ptr, rhs._ptr); //swaps rhs._ptr into _ptr. 
         std::swap(_size, rhs._size); //swaps rhs._size into _size. 
@@ -106,7 +107,7 @@ public:
         //deallocate memory. Destroy previous content. 
         for (size_t i = 0; i < _size; i++)
         {
-           delete _ptr[i];
+           delete[] _ptr[i];
         }//end of for loop.
 
         //Allocate the new data into _ptr. 
