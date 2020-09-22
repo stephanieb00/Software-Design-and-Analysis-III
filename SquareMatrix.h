@@ -60,21 +60,9 @@ public:
             _ptr[i] = new T[_size];//columns
             for (size_t j = 0; j < _size; j++)
             {
-                _ptr[i][j] = trg._ptr[i][j]
-            }//end of for loop.
-        }//end of for loop. 
-        
-
-
-        //set the contents in the trg 2D array to the _ptr. 
-        for (size_t i = 0; i < trg._size; i++)
-        {
-            for (size_t j = 0; j < trg._size; j++)
-            {
                 _ptr[i][j] = trg._ptr[i][j];
-            }//end of for loop. 
-        }//end of for loop.
-        
+            }//end of for loop.
+        }//end of for loop.    
 
     }//end of copy constructor.
 
