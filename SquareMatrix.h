@@ -40,7 +40,7 @@ public:
     SquareMatrix(const SquareMatrix& trg)
     {
         _size = trg._size;
-        _ptr = new SquareMatrix<T>[_size][_size];//dynamic 2D Array.
+        _ptr = new T[_size][_size];//dynamic 2D Array.
 
         //set the contents in the trg 2D array to the _ptr. 
         for (size_t i{0}; i < trg._size; i++)
@@ -109,7 +109,7 @@ public:
 
         //Allocate the new data into _ptr. 
         _size = new_size; // _size will be whatever new_size is. 
-        new_array = new SquareMatrix<T>[_size][_size];
+        new_array = new T[_size][_size];
 
         for (size_t i{0}; i < _size; i++)
         {
@@ -118,16 +118,96 @@ public:
                 _ptr[i][j] = new_array[i][j];
             }//for loop.
         }//end of for loop.
-    }//end of resize function.
+    }//end of resize() function.
+
+    /*
+        @param: Operator ==
+        @param: Return True if Matrices A and B have the same size and the same elements inside
+        @param: true_checker is set to true and will be set to false when the elements are not equal to eachother
+    */
+   friend bool operator==(const SquareMatrix& matrix_a, const SquareMatrix& matrix_b)
+   {
+       bool true_checker = true; 
+       //if both matrix have the same size then we want to check the elements else we return false. 
+       if (matrix_a._size == matrix_b._size)
+       {
+           //go through each row and column of the matrix and check if they are identical. 
+           for (size_t i {0}; i < matrix_a._size; i++)
+           {
+               for (size_t j = 0; j < matrix_a._size; j++)
+               {
+                   if (matrix_a._ptr[i][j] == matrix_a._ptr[i][j])
+                   {
+                       true_checker = true;
+                   }//end of if statement
+                   else
+                   {
+                       true_checker = false;
+                   }//end of else statement. 
+               }//end of for loop.       
+           }//end of for loop
+           return true_checker;
+       }//end of if statement.
+
+       else
+       {
+           return false;
+       }// end of else statement.
+   }// end of operator==() function. 
+   
+    /*
+        @param: Operator+... must be the same size.
+        @post: matrix_c that is the sum of matrix_a and matrix_b
+        @return: matrix_c
+    */
+   friend SquareMatrix operator+(const SquareMatrix& matrix_a, const SquareMatrix& matrix_b)
+   {
+       SquareMatrix matrix_c;
+
+       //we want to add the sums of the elements of both matrices when they have the same same. 
+       if (matrix_a._size == matrix_b._size)
+       {
+           matrix_c._size= matrix_b._size;
+           matrix_c._ptr = new T[matrix_c._size][matrix_c._size] 
+           for (size_t i {0}; i < matrix_c._size; i++)
+           {
+               for (size_t j = 0; j < count; j++)
+               {
+                   matrix_c[i][j] = matrix_a[i][j] + matrix_b[i][j];
+               }//end of for statement
+               
+           }//end of for statement
+       }//end of if statement. 
+       
+
+       return matrix_c;
+   }//end of operator+() function. 
+   
+   /*
+        @param: Function at(row, column)
+        @param: returns a reference (&) to the element in the row and column that is given. 
+        @return: if element found then return that element. else throw the std::out_of_range
+   */
+  T& at(size_t row, size_t column)
+  {
+      if (((row >= 0) && (row <= _size)) && ((column >= 0) && (column <=_size)))
+      {
+          return _ptr[row][column];
+      }
+      else
+      {
+          throw std::out_of_range("The suggested row or column doesn't exist");
+      }//end of else statement 
+  }// end of function at(). 
 
     /*
         @param: Function Size
         @returns: _size
     */
-   size_t size()
+   size_t size() const
    {
        return _size;
-   }//end of function size;
+   }//end of function size();
 
 
 };
