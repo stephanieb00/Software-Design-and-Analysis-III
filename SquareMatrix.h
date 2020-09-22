@@ -43,7 +43,7 @@ public:
     SquareMatrix(const SquareMatrix<T>& trg)
     {
         _size = trg._size;
-        _ptr = new T[_size][_size];//dynamic 2D Array.
+        _ptr = new T*[_size][_size];//dynamic 2D Array.
 
         //set the contents in the trg 2D array to the _ptr. 
         for (size_t i = 0; i < trg._size; i++)
@@ -112,7 +112,7 @@ public:
 
         //Allocate the new data into _ptr. 
         _size = new_size; // _size will be whatever new_size is. 
-        new_array = new T[_size][_size];
+        new_array = new T*[_size][_size];
 
         for (size_t i = 0; i < _size; i++)
         {
@@ -171,7 +171,7 @@ public:
        if (matrix_a._size == matrix_b._size)
        {
            matrix_c._size= matrix_b._size;
-           matrix_c._ptr = new T[matrix_c._size][matrix_c._size];
+           matrix_c._ptr = new T*[matrix_c._size][matrix_c._size];
            for (size_t i = 0; i < matrix_c._size; i++)
            {
                for (size_t j = 0; j < matrix_c._size; j++)
