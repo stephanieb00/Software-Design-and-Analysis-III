@@ -12,11 +12,12 @@ void Test1()
     cout<<matrix_c.size();
     SquareMatrix<short> sh_matrix;
     sh_matrix.resize(2);
+    cout<< "Matrix sh_matrix Size: "<< sh_matrix.size()<< endl;
     sh_matrix.at(0,0)=1;
     sh_matrix.at(0,1)=1;
     sh_matrix.at(1,0)=1;
     sh_matrix.at(1,1)=1;
-    cout<< sh_matrix.at(1,1);
+    cout<< "Printing at()"<<sh_matrix.at(1,1)<<endl;
     
 }
 int main()
