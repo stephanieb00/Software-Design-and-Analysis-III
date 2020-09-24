@@ -23,10 +23,10 @@ void Test1()
     SquareMatrix<string> string_matrix;
     string_matrix.resize(2);
     cout<< "Matrix string_matrix Size: "<< string_matrix.size()<< endl;
-    sh_matrix.at(0,0)= "Hello";
-    sh_matrix.at(0,1)="Goodbye";
-    sh_matrix.at(1,0)="Hola";
-    sh_matrix.at(1,1)="Adios";
+    string_matrix.at(0,0)= "Hello";
+    string_matrix.at(0,1)="Goodbye";
+    string_matrix.at(1,0)="Hola";
+    string_matrix.at(1,1)="Adios";
     cout<< "Should print adios"<<string_matrix.at(1,1)<<endl;
     cout<< "should print hello"<<string_matrix.at(0,0)<<endl;
 
