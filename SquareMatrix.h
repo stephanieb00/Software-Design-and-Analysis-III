@@ -10,7 +10,7 @@ template<typename T>
 class SquareMatrix
 {
 private:
-    T *_ptr;
+    T **_ptr; //2 dimensional array. 
     size_t _size;
 public:
     /*
@@ -31,16 +31,13 @@ public:
     */
     ~SquareMatrix()
     {
-       /* for (size_t i = 0; i < _size; i++)
+        for (size_t i = 0; i < _size; i++)
         {
-            for (size_t j = 0; j < _size; j++)
-            {
-                delete[] _ptr[i][j];
-            }//end of for loop.
             delete[] _ptr[i];
-        }//end of for loop */
+        }//end of for loop 
+
         delete[] _ptr;
-        _ptr = nullptr;
+        //_ptr = nullptr;
         _size = 0;
     }//end of destructor
     
@@ -53,11 +50,11 @@ public:
     SquareMatrix(const SquareMatrix<T>& trg)
     {
         _size = trg._size;
-        _ptr = new T[_size];//creates an array of rows. 
+        _ptr = new T*[_size];//creates an array of rows. 
 
         for (size_t i = 0; i < _size; i++)
         {
-            _ptr[i] = new T[_size];//columns
+            _ptr[i] = new T[_size];//each row will have an array of columns
             for (size_t j = 0; j < _size; j++)
             {
                 _ptr[i][j] = trg._ptr[i][j];
@@ -67,10 +64,11 @@ public:
     }//end of copy constructor.
 
     /*
-        @param: move constructor
+        @param: move constructor 
     */
     SquareMatrix(SquareMatrix<T>&& trg)
     {
+        _size = trg._size;
         _ptr = trg._ptr;
         trg._ptr = nullptr; 
     }//end of move constructor.
@@ -105,7 +103,7 @@ public:
         @param: release all of the previous memory.
         @param: Allocate new memory. Can be any value <T>
     */
-  /*  void resize(size_t new_size)
+    void resize(size_t new_size)
     {
         //compare new_size and _size. If they are the same there is not need to resize.
         if (new_size == _size)
@@ -118,21 +116,20 @@ public:
         {
            delete _ptr[i];
         }//end of for loop.
+        delete[] _ptr;
+        _ptr = nullptr;
+        _size = 0; //reset _size
 
-        //Allocate the new data into _ptr. 
-        _size = new_size; // _size will be whatever new_size is. 
-        new_array = new T[_size][_size];
+        _size = new_size;
+        _ptr = new T*[_size];//creates an array of rows. 
 
+        //We want to create a matrix of the new size. 
         for (size_t i = 0; i < _size; i++)
         {
-            for (size_t j = 0; j < _size; j++)
-            {
-                _ptr[i][j] = new_array[i][j];
-            }//for loop.
-        }//end of for loop.
-    }//end of resize() function.
+            _ptr[i] = new T[_size];//each pointer will have a row 
+        }//end of for loop.  
 
-    */
+    }//end of resize() function.
 
     /*
         @param: Operator ==
@@ -182,7 +179,7 @@ public:
        if (matrix_a._size == matrix_b._size)
        {
            matrix_c._size= matrix_b._size;
-           matrix_c._ptr = new T[matrix_c._size][matrix_c._size];
+           matrix_c._ptr = new T*[matrix_c._size][matrix_c._size];
            for (size_t i = 0; i < matrix_c._size; i++)
            {
                for (size_t j = 0; j < matrix_c._size; j++)
