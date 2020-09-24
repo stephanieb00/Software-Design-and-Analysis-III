@@ -16,7 +16,8 @@ void Test1()
     sh_matrix.at(0,1)=1;
     sh_matrix.at(1,0)=1;
     sh_matrix.at(1,1)=1;
-
+    cout<<matrix_c.at(1,1);
+    
 }
 int main()
 {
