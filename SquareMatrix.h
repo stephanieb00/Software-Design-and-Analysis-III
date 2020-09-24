@@ -47,7 +47,7 @@ public:
         @param: creates a 2D Dynamic array and sets it to the raw pointer.
         @param: since it is a square columns and rows are the same. 
     */
-    SquareMatrix(const SquareMatrix<T>& trg)
+    SquareMatrix(const SquareMatrix& trg)
     {
         _size = trg._size;
         _ptr = new T*[_size];//creates an array of rows. 
@@ -59,8 +59,7 @@ public:
             {
                 _ptr[i][j] = trg._ptr[i][j];
             }//end of for loop.
-        }//end of for loop.    
-
+        }//end of for loop. 
     }//end of copy constructor.
 
     /*
@@ -77,23 +76,28 @@ public:
         @param: copy assignment
         @return: *this
     */
-    SquareMatrix& operator=(const SquareMatrix<T>& rhs)
+    SquareMatrix& operator=(const SquareMatrix& rhs)
     { 
+        
         SquareMatrix copy = rhs; //places a copy of rhs into copy;
         std::swap(*this, copy); //swaps copy into *this. 
         return *this;
+        
+       
     }//end of copy assignment.
 
     /*
         @param: move assignment
         @param: use swap for three copies  
     */
-    SquareMatrix& operator=(SquareMatrix<T>&& rhs)
+    SquareMatrix& operator=(SquareMatrix&& rhs)
     {
+        
         std::swap(_ptr, rhs._ptr); //swaps rhs._ptr into _ptr. 
         std::swap(_size, rhs._size); //swaps rhs._size into _size. 
-
+       
         return *this;
+
     }//end of move assignment.
 
     //-------------------------- End of Big Five -----------------------------
@@ -147,7 +151,7 @@ public:
            {
                for (size_t j = 0; j < matrix_a._size; j++)
                {
-                   if (matrix_a._ptr[i][j] == matrix_a._ptr[i][j])
+                   if (matrix_a._ptr[i][j] == matrix_b._ptr[i][j])
                    {
                        true_checker = true;
                    }//end of if statement
@@ -178,18 +182,16 @@ public:
        //we want to add the sums of the elements of both matrices when they have the same same. 
        if (matrix_a._size == matrix_b._size)
        {
-           matrix_c._size= matrix_b._size;
-           matrix_c._ptr = new T*[matrix_c._size][matrix_c._size];
+           matrix_c._size = matrix_b._size;
            for (size_t i = 0; i < matrix_c._size; i++)
            {
                for (size_t j = 0; j < matrix_c._size; j++)
                {
-                   matrix_c[i][j] = matrix_a[i][j] + matrix_b[i][j];
+                   matrix_c._ptr[i][j] = matrix_a._ptr[i][j] + matrix_b._ptr[i][j];
                }//end of for statement
                
            }//end of for statement
        }//end of if statement. 
-       
 
        return matrix_c;
    }//end of operator+() function. 
