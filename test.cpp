@@ -141,7 +141,8 @@ void Test3()
     matrix_b.at(2,2)=1;
 
     matrix_c = matrix_a+ matrix_b;
-     
+
+    //This Should all print out 10. 
     cout<<"Matrix C"<<endl;
     for (size_t i = 0; i < matrix_c.size(); i++)
     {
@@ -157,6 +158,6 @@ int main()
 {
     Test1();//works 
     Test2();//works
-    Test3();
+    Test3();//works
     return 0;
 }

@@ -64,6 +64,7 @@ public:
 
     /*
         @param: move constructor 
+        @param: we want to have _ptr have trg's array. 
     */
     SquareMatrix(SquareMatrix<T>&& trg)
     {
@@ -74,16 +75,15 @@ public:
 
     /*
         @param: copy assignment
+        @param: we want to check if _ptr is nullptr because 
+                if not then we want to be able to deallocate memory. 
         @return: *this
     */
     SquareMatrix& operator=(const SquareMatrix& rhs)
     { 
-        
         SquareMatrix copy = rhs; //places a copy of rhs into copy;
         std::swap(*this, copy); //swaps copy into *this. 
         return *this;
-        
-       
     }//end of copy assignment.
 
     /*
@@ -177,23 +177,24 @@ public:
     */
    friend SquareMatrix operator+(const SquareMatrix& matrix_a, const SquareMatrix& matrix_b)
    {
-       SquareMatrix matrix_c;
-
        //we want to add the sums of the elements of both matrices when they have the same same. 
        if (matrix_a._size == matrix_b._size)
        {
-           matrix_c._size = matrix_b._size;
-           for (size_t i = 0; i < matrix_c._size; i++)
+           for (size_t i = 0; i <matrix_a._size; i++)
            {
-               for (size_t j = 0; j < matrix_c._size; j++)
+               for (size_t j = 0; j < matrix_a._size; j++)
                {
-                   matrix_c._ptr[i][j] = matrix_a._ptr[i][j] + matrix_b._ptr[i][j];
-               }//end of for statement
+                   matrix_a._ptr[i][j] = matrix_a._ptr[i][j] + matrix_b._ptr[i][j];
+               }//end of for statement.
                
-           }//end of for statement
+           }//end of for statement.
        }//end of if statement. 
+       else
+       {
+           throw std::out_of_range("The size of both these Matrices are not equal.");
+       }//end of else statement.
 
-       return matrix_c;
+       return matrix_a;
    }//end of operator+() function. 
    
    /*
