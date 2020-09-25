@@ -75,20 +75,18 @@ public:
 
     /*
         @param: copy assignment
-        @param: we want to check if _ptr is nullptr because 
-                if not then we want to be able to deallocate memory. 
         @return: *this
     */
     SquareMatrix& operator=(const SquareMatrix& rhs)
     { 
         SquareMatrix copy = rhs; //places a copy of rhs into copy;
-        std::swap(*this, copy); //swaps copy into *this. 
+        std::swap(*this, copy); //swaps copy(copy of rhs) into *this. 
         return *this;
     }//end of copy assignment.
 
     /*
         @param: move assignment
-        @param: use swap for three copies  
+        @return: *this
     */
     SquareMatrix& operator=(SquareMatrix&& rhs)
     {

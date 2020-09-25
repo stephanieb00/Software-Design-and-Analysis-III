@@ -32,7 +32,7 @@ void Test1()
     string_matrix.at(1,1)="Adios";
     cout<< "Should print Adios: "<<string_matrix.at(1,1)<<endl;
     cout<< "should print Hello: "<<string_matrix.at(0,0)<<endl;
-}
+}//end of Test 1.
 void Test2()
 {
     SquareMatrix<int> matrix_a, matrix_b,matrix_c;
@@ -110,7 +110,7 @@ void Test2()
     else{
         cout<< "Matrix A and C is not equal "<< endl;
     }//should print equal
-}
+}//end of Test 2.
 
 void Test3()
 {
@@ -153,11 +153,61 @@ void Test3()
         cout<<endl;
     }
 
+}//end og Test 3
+void Test4()
+{
+    SquareMatrix<int> matrix_a, matrix_b;
+    cout<< "Matrix A Size: "<< matrix_a.size()<< endl;
+    matrix_a.resize(3);
+    matrix_a.at(0,0)=1;
+    matrix_a.at(0,1)=2;
+    matrix_a.at(0,2)=3;
+    matrix_a.at(1,0)=4;
+    matrix_a.at(1,1)=5;
+    matrix_a.at(1,2)=6;
+    matrix_a.at(2,0)=7;
+    matrix_a.at(2,1)=8;
+    matrix_a.at(2,2)=9;
+
+    matrix_b = matrix_a;
+    cout<<"Matrix B"<<endl;
+    for (size_t i = 0; i < matrix_b.size(); i++)
+    {
+        for (size_t j = 0; j <matrix_b.size() ; j++)
+        {
+           cout<<matrix_b.at(i,j);
+        }
+        cout<<endl;
+    }
+    SquareMatrix<int> matrix_c, matrix_d;
+
+    matrix_d = matrix_c =  matrix_b;
+
+    cout<<"Matrix C"<<endl;
+    for (size_t i = 0; i < matrix_c.size(); i++)
+    {
+        for (size_t j = 0; j <matrix_c.size() ; j++)
+        {
+           cout<<matrix_c.at(i,j);
+        }
+        cout<<endl;
+    }
+
+    cout<<"Matrix D"<<endl;
+    for (size_t i = 0; i < matrix_d.size(); i++)
+    {
+        for (size_t j = 0; j <matrix_d.size() ; j++)
+        {
+           cout<<matrix_d.at(i,j);
+        }
+        cout<<endl;
+    }
 }
 int main()
 {
     Test1();//works 
     Test2();//works
     Test3();//works
+    Test4();
     return 0;
 }
