@@ -139,8 +139,8 @@ void Test3()
     matrix_b.at(2,0)=3;
     matrix_b.at(2,1)=2;
     matrix_b.at(2,2)=1;
-
-    matrix_c = matrix_a+ matrix_b;
+    cout<<"Before equal"<<endl;
+    matrix_c = matrix_a + matrix_b;
 
     //This Should all print out 10. 
     cout<<"Matrix C"<<endl;

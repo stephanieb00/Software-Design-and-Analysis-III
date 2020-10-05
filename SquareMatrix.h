@@ -10,7 +10,7 @@ template<typename T>
 class SquareMatrix
 {
 private:
-    T **_ptr; //2 dimensional array. 
+    T **_ptr; //2 dimensional array pointer. 
     size_t _size;
 public:
     /*
@@ -21,6 +21,24 @@ public:
         _size = 0;
         _ptr = nullptr;
     }//end of default constructor.
+    
+    /*
+        @param: parameterized constructor
+        @param: initialize _size and _ptr
+    */
+    SquareMatrix(size_t size){
+        _size = size;
+        _ptr = new T*[_size];//creates an array of rows. 
+
+        for (size_t i = 0; i < _size; i++)
+        {
+            _ptr[i] = new T[_size];//each row will have an array of columns
+            for (size_t j = 0; j < _size; j++)
+            {
+                _ptr[i][j] = this->_ptr[i][j];
+            }//end of for loop.
+        }//end of for loop. 
+    }//end of default constructor.
 
     //---------------------------- Big Five -------------------------------
 
@@ -28,24 +46,27 @@ public:
         @param: destructor 
         @param: we want to be able to destroy _ptr which is 2D array in order to be able to deallocate memory 
                 and we want to reset size to 0;
+        @param: check for _ptr!=nullptr 
     */
     ~SquareMatrix()
     {
-        for (size_t i = 0; i < _size; i++)
-        {
-            delete[] _ptr[i];
-        }//end of for loop 
+        if(_ptr!=nullptr){
+            for (size_t i = 0; i < _size; i++)
+            {
+                delete[] _ptr[i];
+            }//end of for loop 
 
-        delete[] _ptr;
-        //_ptr = nullptr;
-        _size = 0;
+            delete[] _ptr;
+            //_ptr = nullptr;
+            _size = 0;
+        }//end of if statement
     }//end of destructor
     
     /*
         @param: copy constructor
         @param: sets _size to the size of trg.
         @param: creates a 2D Dynamic array and sets it to the raw pointer.
-        @param: since it is a square columns and rows are the same. 
+        @param: since it is a square columns and rows are the same size. 
     */
     SquareMatrix(const SquareMatrix& trg)
     {
@@ -75,6 +96,8 @@ public:
 
     /*
         @param: copy assignment
+        @param: you need to create a copy of rhs in order to be able to swap the contents of it. 
+                If not then using swap is not appropriate. 
         @return: *this
     */
     SquareMatrix& operator=(const SquareMatrix& rhs)
@@ -103,7 +126,7 @@ public:
     /*
         @param: Function resize
         @param: release all of the previous memory.
-        @param: Allocate new memory. Can be any value <T>
+        @param: Allocate new memory. Can be any value of <T>
     */
     void resize(size_t new_size)
     {
@@ -114,13 +137,15 @@ public:
         }
         
         //deallocate memory. Destroy previous content. 
-        for (size_t i = 0; i < _size; i++)
-        {
-           delete _ptr[i];
-        }//end of for loop.
-        delete[] _ptr;
-        _ptr = nullptr;
-        _size = 0; //reset _size
+        if(_ptr!=nullptr){
+            for (size_t i = 0; i < _size; i++)
+            {
+                delete _ptr[i];
+            }//end of for loop.
+            delete[] _ptr;
+        }//end of if statement
+        //_ptr = nullptr;
+        //_size = 0; //reset _size
 
         _size = new_size;
         _ptr = new T*[_size];//creates an array of rows. 
@@ -136,11 +161,10 @@ public:
     /*
         @param: Operator ==
         @param: Return True if Matrices A and B have the same size and the same elements inside
-        @param: true_checker is set to true and will be set to false when the elements are not equal to eachother
+        @param: We want to check if any elements of the matrix are not equal to eachother and if so then we want to return false
     */
    friend bool operator==(const SquareMatrix& matrix_a, const SquareMatrix& matrix_b)
    {
-       bool true_checker = true; 
        //if both matrix have the same size then we want to check the elements else we return false. 
        if (matrix_a._size == matrix_b._size)
        {
@@ -149,19 +173,14 @@ public:
            {
                for (size_t j = 0; j < matrix_a._size; j++)
                {
-                   if (matrix_a._ptr[i][j] == matrix_b._ptr[i][j])
+                   if (matrix_a._ptr[i][j] != matrix_b._ptr[i][j])
                    {
-                       true_checker = true;
+                       return false;
                    }//end of if statement
-                   else
-                   {
-                       true_checker = false;
-                   }//end of else statement. 
                }//end of for loop.       
            }//end of for loop
-           return true_checker;
+           return true;
        }//end of if statement.
-
        else
        {
            return false;
@@ -178,21 +197,22 @@ public:
        //we want to add the sums of the elements of both matrices when they have the same same. 
        if (matrix_a._size == matrix_b._size)
        {
+           SquareMatrix matrix_c(matrix_a.size());
+           //matrix_c._size= matrix_a._size;
            for (size_t i = 0; i <matrix_a._size; i++)
            {
                for (size_t j = 0; j < matrix_a._size; j++)
                {
-                   matrix_a._ptr[i][j] = matrix_a._ptr[i][j] + matrix_b._ptr[i][j];
+                   matrix_c._ptr[i][j] = matrix_a._ptr[i][j] + matrix_b._ptr[i][j];
                }//end of for statement.
                
            }//end of for statement.
+           return matrix_c;
        }//end of if statement. 
        else
        {
            throw std::out_of_range("The size of both these Matrices are not equal.");
        }//end of else statement.
-
-       return matrix_a;
    }//end of operator+() function. 
    
    /*
@@ -202,7 +222,7 @@ public:
    */
   T& at(size_t row, size_t column)
   {
-      if (((row >= 0) && (row <= _size)) && ((column >= 0) && (column <=_size)))
+      if (((row >= 0) && (row < _size)) && ((column >= 0) && (column <_size)))
       {
           return _ptr[row][column];
       }
