@@ -25,6 +25,7 @@ public:
     /*
         @param: parameterized constructor
         @param: initialize _size and _ptr
+        this is to help the operator+ function.
     */
     SquareMatrix(size_t size){
         _size = size;
@@ -39,7 +40,6 @@ public:
             }//end of for loop.
         }//end of for loop. 
     }//end of default constructor.
-
     //---------------------------- Big Five -------------------------------
 
     /*
@@ -140,7 +140,7 @@ public:
         if(_ptr!=nullptr){
             for (size_t i = 0; i < _size; i++)
             {
-                delete _ptr[i];
+                delete[] _ptr[i];
             }//end of for loop.
             delete[] _ptr;
         }//end of if statement
