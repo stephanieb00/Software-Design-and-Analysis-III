@@ -6,6 +6,7 @@
 #include <cctype>
 #include <vector>
 #include <unordered_map>
+using namespace std;
 /*
     Parameterized Constructor
     @param: O(N+M) where N = # of words in Keyword file and M = # of words in text file
