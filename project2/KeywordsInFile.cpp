@@ -13,7 +13,7 @@
     @param: find keywords in a file create a vector of those keywords to use non alphabetic symbols as seprators to then add it to a set. 
     @param: read the text file. creates a vector of strings and then has this vector be added to the unordered map. Each line will be a key.
 */
-KeywordsInFile::KeywordsInFile( const std::string& filename_with_keywords,const std::string& filename_with_text)
+KeywordsInFile::KeywordsInFile( const std::string filename_with_keywords,const std::string filename_with_text)
 {
     std::ifstream text_file(filename_with_text);
     std::ifstream keyword_file(filename_with_keywords);
@@ -112,7 +112,7 @@ bool KeywordsInFile::KeywordFound(std::string keyword)
     @param: if we find the keyword then count goes up by one.
     @return: count.
 */
-size_t KeywordsInFile::KeywordInLine( std::string& keyword, size_t& line_number )
+size_t KeywordsInFile::KeywordInLine( std::string keyword, size_t line_number )
 {   
     return text_map.at(keyword) = line_number;
 }//end of KeywordInLine
@@ -128,7 +128,7 @@ size_t KeywordsInFile::KeywordInLine( std::string& keyword, size_t& line_number 
             
     @return: count.
 */
-size_t KeywordsInFile::TotalOccurrences( std::string& keyword )
+size_t KeywordsInFile::TotalOccurrences( std::string keyword )
 {
 
     return text_map[keyword];
