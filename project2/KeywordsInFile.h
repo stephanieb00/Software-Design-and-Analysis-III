@@ -17,6 +17,8 @@ class KeywordsInFile
                     It will also be used to cross refrence the words found in the text file. 
         */
         std::set<std::string>keyword_set;//set of keywords.
+        //Disable default constructor. 
+        KeywordsInFile() = delete;
         /*
             @param: Parameterized constructor that searches through keyword file 
                     and adds keywords to keyword_set.
