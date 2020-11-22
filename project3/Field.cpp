@@ -125,54 +125,6 @@ Field::Field(const std::vector<std::vector<int>>& trg)
         
     }//end of for loop. 
     
-   /*
-   for (size_t i = 0; i < x_size; i++)
-   {
-        std:: cout<<"util"<<util<< std::endl; //pass.
-        std::cout<< "i"<<i<<std::endl;
-
-       if (util <= original_matrix[0].size())
-       {
-           //std:: cout<<"For Loop if statement= "<< weighed_matrix[0][util]<<std::endl; //pass.
-           if (util!=0)
-           {
-               weighed_matrix[util][0] = original_matrix[util][0]+ weighed_matrix[util-1][0];// x = 0
-           }
-           //std:: cout<<"For Loop: "<< weighed_matrix[i-1][0]<<std::endl; //pass.
-           if (i != 0)
-           {
-               weighed_matrix[0][i] = original_matrix[0][i] + weighed_matrix[0][i-1];// y = 0
-           }//end of if statement
-           
-           //weighed_matrix[i][0] = original_matrix[i][0] + weighed_matrix[i-1][0];// y = 0
-           //std:: cout<<"For Loop:"<< std::endl; //fail
-           util++;
-       }
-   }//end of for loop.
-   */   
-  /*
-   std::cout<<"Testing For The Inside of the Matrix. from (2,2) to (end of x axis, end of y axis.)"<<std::endl;
-   for(int i = 0; i < weighed_matrix.size(); i++) 
-   {
-        for(int j = 0; j < weighed_matrix[0].size(); j++) 
-        {
-            std::cout << weighed_matrix[i][j] << " ";
-        }//end of for loop.
-        std::cout << std::endl;
-    }//end of for loop.
-    */
-  /*
-  std::cout<<"second for loop"<<std::endl;
-   for (size_t i = 2; i < original_matrix.size(); i++)
-   {
-       std::cout<<"second for loop"<<std::endl;
-       if (util2 <= x_size)
-       {
-           weighed_matrix[i][util] = original_matrix[i][util]+ weighed_matrix[i][util-1]+weighed_matrix[i-1][util] - weighed_matrix[i-1][util-1];
-           util++;
-       }
-   }//end of for loop
-   */
 }//end of Field Copy constructor. 
 
 
@@ -443,15 +395,17 @@ int Field::Weight( int x1, int y1, int x2, int y2 )
         In a way we need four points again. 
         Similar to how we did the precomputations in our constructors. 
         We can use what we learned in class during our dynamic programming lectures. 
+@param: we want to look for the cheapest cost so we can use the min() algorithm
+        This will compare the coordinates and add he number that is less. 
 @return: cheapest_cost but not the matrix. We want the value of the coordinate before the bottom right. 
 */
-
 
 int Field::PathCost()
 {
    // std::cout<< "Hello Welcome to Path Cost Function"<<std::endl;//passed
 
     cheapest_cost[0][0] = original_matrix[0][0];
+    int return_cost = 0;
 
     int x_size = original_matrix[0].size();
     //int util = 0;
@@ -482,5 +436,6 @@ int Field::PathCost()
             cheapest_cost[i][j] = original_matrix[i][j] + std::min(cheapest_cost[i][j-1], cheapest_cost[i-1][j]);
         }//end of for loop.
     }//end of for loop.
-    return cheapest_cost[original_matrix.size()-1][x_size-1];
+    return_cost = cheapest_cost[original_matrix.size()-1][x_size-1];
+    return return_cost;
 }//end of PathCost Function
