@@ -76,27 +76,16 @@ Field::Field(const std::vector<std::vector<int>>& trg)
             However, if the y axis is smaller than the x axis then it would not work!!!
             Therefore instead of util, we opted for a nested loop with i representing the y values and a representing the x values
     */
-    for (size_t i = 0; i < original_matrix.size(); i++)
+
+    for (size_t i = 1; i < original_matrix.size(); i++)
     {
-        //i is the vector of vectors... the y.
-
-        //Testing if the for loop has been entered. and testing the x axis.
-        //std::cout<< i << std::endl; 
-
-        for (size_t j = 0; j < x_size; j++)
-        {
-            //j is the rows... the vector... the x.
-            if (j!=0)
-            {
-                weighed_matrix[0][j] = original_matrix[0][j]+ weighed_matrix[0][j-1];// x = 0
-
-            }//end of if statement 
-            if (i != 0)
-            {
-                weighed_matrix[i][0] = original_matrix[i][0] + weighed_matrix[i-1][0];// y = 0
-            }//end of if statement 
-        }//end of for loop.
-    }//end of for loop.
+        /* code */
+        weighed_matrix[i][0] = original_matrix[i][0] + weighed_matrix[i-1][0];// y = 0
+    }//end of for loop
+    for (size_t i = 1; i < x_size; i++)
+    {
+       weighed_matrix[0][i] = original_matrix[0][i]+ weighed_matrix[0][i-1];// x = 0
+    }//end of for loop
     /*
     std::cout <<"Testing the edge cases of the for loop. "<<std::endl;
     for(int i = 0; i < weighed_matrix.size(); i++) 
@@ -123,7 +112,18 @@ Field::Field(const std::vector<std::vector<int>>& trg)
    
         }//end of for loop. 
         
-    }//end of for loop. 
+    }//end of for loop.
+    /*
+    std::cout <<"Testing the whole matrix. "<<std::endl;
+    for(int i = 0; i < weighed_matrix.size(); i++) 
+    {
+        for(int j = 0; j < weighed_matrix[0].size(); j++) 
+        {
+            std::cout << weighed_matrix[i][j] << " ";
+        }//end of for loop
+        std::cout << std::endl;
+    }//end of for loop
+    */
     
 }//end of Field Copy constructor. 
 
@@ -201,27 +201,16 @@ Field::Field(std::vector<std::vector<int>> && trg)
             However, if the y axis is smaller than the x axis then it would not work!!!
             Therefore instead of util, we opted for a nested loop with i representing the y values and a representing the x values
     */
-    for (size_t i = 0; i < original_matrix.size(); i++)
+
+    for (size_t i = 1; i < original_matrix.size(); i++)
     {
-        //i is the vector of vectors... the y.
-
-        //Testing if the for loop has been entered. and testing the x axis.
-        //std::cout<< i << std::endl; 
-
-        for (size_t j = 0; j < x_size; j++)
-        {
-            //j is the rows... the vector... the x.
-            if (j!=0)
-            {
-                weighed_matrix[0][j] = original_matrix[0][j]+ weighed_matrix[0][j-1];// x = 0
-
-            }//end of if statement 
-            if (i != 0)
-            {
-                weighed_matrix[i][0] = original_matrix[i][0] + weighed_matrix[i-1][0];// y = 0
-            }//end of if statement 
-        }//end of for loop.
-    }//end of for loop.
+        /* code */
+        weighed_matrix[i][0] = original_matrix[i][0] + weighed_matrix[i-1][0];// y = 0
+    }//end of for loop
+    for (size_t i = 1; i < x_size; i++)
+    {
+       weighed_matrix[0][i] = original_matrix[0][i]+ weighed_matrix[0][i-1];// x = 0
+    }//end of for loop
     /*
     std::cout <<"Testing the edge cases of the for loop. "<<std::endl;
     for(int i = 0; i < weighed_matrix.size(); i++) 
@@ -248,7 +237,19 @@ Field::Field(std::vector<std::vector<int>> && trg)
    
         }//end of for loop. 
         
-    }//end of for loop. 
+    }//end of for loop.
+    /*
+    std::cout <<"Testing the whole matrix. "<<std::endl;
+    for(int i = 0; i < weighed_matrix.size(); i++) 
+    {
+        for(int j = 0; j < weighed_matrix[0].size(); j++) 
+        {
+            std::cout << weighed_matrix[i][j] << " ";
+        }//end of for loop
+        std::cout << std::endl;
+    }//end of for loop
+    */
+    
     
 }//end of move constructor. 
 
@@ -397,45 +398,48 @@ int Field::Weight( int x1, int y1, int x2, int y2 )
         We can use what we learned in class during our dynamic programming lectures. 
 @param: we want to look for the cheapest cost so we can use the min() algorithm
         This will compare the coordinates and add he number that is less. 
-@return: cheapest_cost but not the matrix. We want the value of the coordinate before the bottom right. 
+@return: cost which is not the matrix. We want the value of the coordinate before the bottom right. 
 */
-
 int Field::PathCost()
 {
-   // std::cout<< "Hello Welcome to Path Cost Function"<<std::endl;//passed
-
+    /*
+    @param: We want to find the cheapest path from (0,0) to (original_matrix.size()-1, original_matrix[0].size()-1)
+            x = original_matrix.size()-1; our target x value.
+            y = original_matrix[0].size()-1 our target y value. 
+            we will use original_matrix to get our path. 
+            We can't use recursion because there are no arguments...
+     */
     cheapest_cost[0][0] = original_matrix[0][0];
-    int return_cost = 0;
-
-    int x_size = original_matrix[0].size();
-    //int util = 0;
-    //std::cout<< cheapest_cost[0][0]<<std::endl;
-
-    //Similar procces to what we did in the constructors. 
-    for (size_t i = 0; i < original_matrix.size(); i++)
-    {
-        for (size_t j = 0; j < x_size; j++)
-        {
-            if (j!=0)
-            {
-                cheapest_cost[0][j] = original_matrix[0][j]+ cheapest_cost[0][j-1];// x = 0
-
-            }//end of if statement 
-            if (i!=0)
-            {
-                cheapest_cost[i][0] = original_matrix[i][0] + cheapest_cost[i-1][0];// y = 0
-            }//end of if statement 
-        }//end of for loop.
-    }//end of for loop.
-
-    //we want to find the minimum/ cheapest cost. 
+    int cost = 0;
     for (size_t i = 1; i < original_matrix.size(); i++)
     {
-        for (size_t j = 1; j < x_size; j++)
+        cheapest_cost[i][0] = cheapest_cost[i-1][0] + original_matrix[i][0];
+    }//end of for loop.
+    
+    for (size_t i = 1; i < original_matrix[0].size(); i++)
+    {
+        cheapest_cost[0][i] = cheapest_cost[0][i-1] + original_matrix[0][i];   
+    }//end of for loop.
+    //std::cout<<original_matrix.size()<<std::endl;
+    for (size_t i = 1; i < original_matrix.size(); i++)
+    {
+        for (size_t j = 1; j < original_matrix[0].size(); j++)
         {
             cheapest_cost[i][j] = original_matrix[i][j] + std::min(cheapest_cost[i][j-1], cheapest_cost[i-1][j]);
-        }//end of for loop.
-    }//end of for loop.
-    return_cost = cheapest_cost[original_matrix.size()-1][x_size-1];
-    return return_cost;
-}//end of PathCost Function
+        }   
+    }
+    /*
+    std::cout<<"Testing For Cheapest Cost"<<std::endl;
+    for(int i = 0; i < cheapest_cost.size(); i++) 
+    {
+        for(int j = 0; j < cheapest_cost[0].size(); j++) 
+        {
+            std::cout << cheapest_cost[i][j] << " ";
+        }//end of for loop
+        std::cout << std::endl;
+    }//end of for loop
+    */
+    cost = cheapest_cost[original_matrix.size()-1][original_matrix[0].size()-1];
+
+    return cost;   
+}
