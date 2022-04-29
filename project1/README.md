@@ -1,5 +1,4 @@
-**Project1**
-Home Project #1
+**Home Project #1**
 
 
 Write a class template SquareMatrix that implements a square matrix of elements of a specified type. The class template should be fully in the SquareMatrix.h file.
