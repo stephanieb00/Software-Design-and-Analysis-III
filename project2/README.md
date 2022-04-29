@@ -1,13 +1,4 @@
-Home project #2
-
-Due to October 29, 11:59 pm. No late submissions are accepted!
-Your submission should not contain your name or Hunter ID. Any submission containing such information is an automatic 0 points (those are the Hunter rules).
-
-Your program should be submitted ONLY through the Blackboard. You should submit only the KeywordsInFile.h and KeywordsInFile.cpp files.
-
-
-The assignment is for the individual work only. You are responsible for every statement in your code.
- 
+#Home project 2
 
 Write a class KeywordsInFile. The only required constructor for this class is
 
